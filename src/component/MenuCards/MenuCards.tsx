@@ -55,14 +55,14 @@ const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searc
                             <li className={sortByPrice ? "page-item active" : "page-item"}>
                                 <a className={sortByPrice ?
                                     "page-link bg-light border-dark text-dark" :
-                                    "page-link bg-dark border-dark text-light"}
+                                    "page-link bg-primary border-dark text-light"}
                                    onClick={(event) => handleSortByPrice(false, event)}>
                                     <FontAwesomeIcon className="fa-sm" icon={faArrowDown}/>
                                 </a>
                             </li>
                             <li className={sortByPrice ? "page-item" : "page-item active"}>
                                 <a className={sortByPrice ?
-                                    "page-link bg-dark border-dark text-light" :
+                                    "page-link bg-primary border-dark text-light" :
                                     "page-link bg-light border-dark text-dark"}
                                    onClick={(event) => handleSortByPrice(true, event)}>
                                     <FontAwesomeIcon className="fa-sm" icon={faArrowUp}/>

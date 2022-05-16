@@ -116,7 +116,7 @@ const AddPerfume: FC = () => {
         <>
             <ToastShow showToast={showToast} message={"Perfume successfully added!"}/>
             <div className="container">
-                <h4><FontAwesomeIcon className="mr-2" icon={faPlusSquare}/>Thêm nước hoa</h4>
+                <h4>Thêm nước hoa</h4>
                 <br/>
                 <form onSubmit={onFormSubmit}>
                     <div className="form row">

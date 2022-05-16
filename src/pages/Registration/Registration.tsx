@@ -55,7 +55,7 @@ const Registration: FC = () => {
     return (
         <div className="container mt-5">
             {pageLoading}
-            <h4><FontAwesomeIcon className="mr-2" icon={faUserPlus}/> ĐĂNG KÝ</h4>
+            <h4>ĐĂNG KÝ</h4>
             <hr/>
             {isRegistered ? <div className="alert alert-success col-6" role="alert">
                 Mã kích hoạt đã được gửi tới email của bạn
@@ -63,7 +63,6 @@ const Registration: FC = () => {
             <form onSubmit={onClickSignUp}>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">E-mail: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
                     <div className="col-sm-4">
                         <input
                             type="email"
@@ -76,7 +75,6 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Họ đệm: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser}/>
                     <div className="col-sm-4">
                         <input
                             type="text"
@@ -89,7 +87,6 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Tên: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser}/>
                     <div className="col-sm-4">
                         <input
                             type="text"
@@ -102,7 +99,6 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Mật khẩu: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -115,7 +111,6 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Nhập lại mật khẩu: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -127,7 +122,7 @@ const Registration: FC = () => {
                     </div>
                 </div>
                 <div className="form-group row">
-                    <button type="submit" className="btn btn-dark mx-3">
+                    <button type="submit" className="btn btn-primary mx-3 px-5">
                         <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>Đăng ký
                     </button>
                 </div>

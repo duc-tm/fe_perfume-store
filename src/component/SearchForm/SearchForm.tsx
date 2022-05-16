@@ -56,7 +56,7 @@ const SearchForm: FC<PropsType> = ({data, searchByData, setFilteredData, setSear
                         onChange={(event) => setSearch(event.target.value)}/>
                 </div>
                 <div className="col-md-3 text-right">
-                    <button type="submit" className="btn btn-dark w-100">
+                    <button type="submit" className="btn btn-primary w-100">
                         <FontAwesomeIcon icon={faSearch}/> Tìm kiếm</button>
                 </div>
             </div>
