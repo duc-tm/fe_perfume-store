@@ -193,13 +193,13 @@ const AddPerfume: FC = () => {
                     </div>
                     <div className="form row mt-3">
                         <div className="col">
-                            <label>Gender: </label>
+                            <label>Giới tính: </label>
                             <select name="perfumeGender"
                                     className={perfumeGenderError ? "form-control is-invalid" : "form-control"}
                                     onChange={handleInputChange}>
                                 <option hidden={true} value=""></option>
-                                <option value="nam">nam</option>
-                                <option value="nữ">nữ</option>
+                                <option value="nam">Nam</option>
+                                <option value="nữ">Nữ</option>
                             </select>
                             <div className="invalid-feedback">{perfumeGenderError}</div>
                         </div>
@@ -257,8 +257,8 @@ const AddPerfume: FC = () => {
                                    onChange={handleFileChange}/>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-dark mt-3">
-                        <FontAwesomeIcon className="mr-2" icon={faPlusSquare}/>Thêm
+                    <button type="submit" className="btn btn-primary mt-3 px-5">
+                        Thêm
                     </button>
                 </form>
             </div>

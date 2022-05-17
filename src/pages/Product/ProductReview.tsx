@@ -33,7 +33,7 @@ const ProductReview: FC<PropType> = ({data, itemsPerPage, startFrom}) => {
                             changePage={changePage}
                             nextPage={nextPage}/>
                     }
-                    {slicedData.length === 0 ? <p className="text-center">There are no reviews for this perfume.</p> :
+                    {slicedData.length === 0 ? <p className="text-center">Chưa có đánh giá</p> :
                         slicedData.map((review: Review) => {
                             return (
                                 <div key={review.id}>

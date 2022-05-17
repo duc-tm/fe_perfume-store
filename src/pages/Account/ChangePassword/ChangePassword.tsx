@@ -33,7 +33,7 @@ const ChangePassword: FC = () => {
 
     return (
         <div className="password_reset">
-            <h4><FontAwesomeIcon className="mr-2" icon={faLock}/> Đổi mật khẩu</h4>
+            <h4>Đổi mật khẩu</h4>
             {success ? <div className="alert alert-success col-6" role="alert">{success}</div> : null}
             <form className="mt-5" onSubmit={onFormSubmit}>
                 <div className="form-group row">
@@ -60,8 +60,8 @@ const ChangePassword: FC = () => {
                         <div className="invalid-feedback">{password2Error}</div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-dark">
-                    <FontAwesomeIcon className="mr-3" icon={faUndo}/>Thay đổi
+                <button type="submit" className="btn btn-primary">
+                    Đổi mật khẩu
                 </button>
             </form>
         </div>

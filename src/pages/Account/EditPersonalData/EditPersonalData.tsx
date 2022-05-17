@@ -102,7 +102,7 @@ const EditPersonalData: FC = () => {
                             onChange={handleInputChange}/>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-dark">
+                <button type="submit" className="btn btn-primary">
                     <FontAwesomeIcon className="mr-2" icon={faCheck}/>Lưu
                 </button>
             </form>

@@ -200,11 +200,11 @@ const EditPerfume: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
                                         {perfumeData.perfumeGender === "male" ?
                                             <>
                                                 <option value={perfumeData.perfumeGender}>{perfumeData.perfumeGender}</option>
-                                                <option value="nữ">nữ</option>
+                                                <option value="nữ">Nữ</option>
                                             </> :
                                             <>
                                                 <option value={perfumeData.perfumeGender}>{perfumeData.perfumeGender}</option>
-                                                <option value="nam">nam</option>
+                                                <option value="nam">Nam</option>
                                             </>}
                                     </select>
                                     <div className="invalid-feedback">{perfumeGenderError}</div>
@@ -264,7 +264,7 @@ const EditPerfume: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
                             <input type="file" name="file" onChange={handleFileChange}/>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-dark">
+                    <button type="submit" className="btn btn-primary">
                         <FontAwesomeIcon className="mr-2" icon={faEdit}/>Sửa
                     </button>
                 </form>

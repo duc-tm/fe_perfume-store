@@ -1,9 +1,6 @@
-import React, {FC} from 'react';
-import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faShoppingBag} from "@fortawesome/free-solid-svg-icons";
-
-import {Order} from "../../types/types";
+import React, { FC } from 'react';
+import { Link } from "react-router-dom";
+import { Order } from "../../types/types";
 import Spinner from "../Spinner/Spinner";
 
 type PropsType = {
@@ -16,15 +13,15 @@ const OrdersTable: FC<PropsType> = ({loading,orders}) => {
         <div className="container">
             {loading ? <Spinner/> :
             <>
-                <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faShoppingBag}/> Danh sách đơn hàng</h4>
+                <h4>Danh sách đơn hàng</h4>
                 <table className="table mt-4 border text-center">
                     <thead className="table-active">
                     <tr>
                         <th>STT</th>
-                        <th>Ngày</th>
+                        <th>Ngày tạo</th>
                         <th>Khách hàng</th>
                         <th>Email</th>
-                        <th>Số tiền $</th>
+                        <th>Số tiền</th>
                         <th></th>
                     </tr>
                     </thead>

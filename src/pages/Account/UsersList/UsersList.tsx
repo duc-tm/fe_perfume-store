@@ -1,13 +1,11 @@
-import React, {FC, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {faUsers} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
-
-import {fetchAllUsers} from "../../../redux/thunks/admin-thunks";
-import {AppStateType} from "../../../redux/reducers/root-reducer";
-import {User} from "../../../types/types";
+import React, { FC, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Spinner from '../../../component/Spinner/Spinner';
+import { AppStateType } from "../../../redux/reducers/root-reducer";
+import { fetchAllUsers } from "../../../redux/thunks/admin-thunks";
+import { User } from "../../../types/types";
+
 
 const UsersList: FC = () => {
     const dispatch = useDispatch();
@@ -22,11 +20,11 @@ const UsersList: FC = () => {
         <div className="container">
             {loading ? <Spinner/> :
             <>
-                <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faUsers}/> Danh sách người dùng</h4>
+                <h4>Danh sách người dùng</h4>
                 <table className="table mt-4 border text-center">
                     <thead className="table-active">
                     <tr>
-                        <th>id</th>
+                        <th>ID</th>
                         <th>Tên</th>
                         <th>E-mail</th>
                         <th>Quyền</th>

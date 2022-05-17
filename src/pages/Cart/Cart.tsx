@@ -1,20 +1,17 @@
-import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
 import {
     faChevronDown,
-    faChevronUp,
-    faMinusSquare,
-    faShoppingBag,
-    faShoppingCart
+    faChevronUp, faShoppingCart
 } from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import {IMG_URL} from "../../utils/constants/url";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Spinner from "../../component/Spinner/Spinner";
-import {calculateCartPrice, fetchCart, loadCart} from "../../redux/thunks/cart-thunks";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {Perfume} from "../../types/types";
+import { AppStateType } from "../../redux/reducers/root-reducer";
+import { calculateCartPrice, fetchCart, loadCart } from "../../redux/thunks/cart-thunks";
+import { Perfume } from "../../types/types";
+import { IMG_URL } from "../../utils/constants/url";
+
 
 const Cart: FC = () => {
     const dispatch = useDispatch();
@@ -72,57 +69,65 @@ const Cart: FC = () => {
     };
 
     return (
-        <div className="container mt-5 pb-5" style={{minHeight: "350px"}}>
-            {loading ? <Spinner/> :
+        <div className="container mt-5 pb-5" style={{ minHeight: "350px" }}>
+            {loading ? <Spinner /> :
                 <div>
                     {perfumes.length === 0 ?
-                        <div style={{textAlign: "center"}}>
+                        <div style={{ textAlign: "center" }}>
                             <h2>Giỏ hàng trống</h2>
                         </div> :
                         <div>
                             <p className="h4 mb-4 text-center">
-                                <FontAwesomeIcon className="mr-2" icon={faShoppingCart}/> Giỏ hàng
+                                <FontAwesomeIcon className="mr-2" icon={faShoppingCart} /> Giỏ hàng
                             </p>
                             {perfumes.map((perfume: Perfume) => {
                                 return (
-                                    <div key={perfume.id} className="card mb-3 mx-auto" style={{maxWidth: "940px"}}>
+                                    <div key={perfume.id} className="card mb-3 mx-auto" style={{ maxWidth: "940px" }}>
                                         <div className="row no-gutters">
                                             <div className="col-2 mx-3 my-3">
-                                                <img src={IMG_URL + `${perfume.filename}`} className="img-fluid"/>
+                                                <img src={`${IMG_URL}${perfume.filename}`} className="img-fluid" />
                                             </div>
                                             <div className="col-6">
                                                 <div className="card-body">
-                                                    <h4 className="card-title">{perfume.perfumer + " " + perfume.perfumeTitle}</h4>
+                                                    <h4 className="card-title">
+                                                        {perfume.perfumer + " " + perfume.perfumeTitle}
+                                                    </h4>
                                                     <p className="card-text">{perfume.type}</p>
-                                                    <p className="card-text"><span>{perfume.volume}</span> ml.</p>
+                                                    <p className="card-text">
+                                                        <span>{perfume.volume}</span> ml.
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div className="col-1 mt-3">
                                                 <button className="btn btn-default"
-                                                        disabled={perfumeInCart.get(perfume.id) === 99}
-                                                        onClick={() => onIncrease(perfume.id)}>
-                                                    <FontAwesomeIcon size="lg" icon={faChevronUp}/>
+                                                    disabled={perfumeInCart.get(perfume.id) === 99}
+                                                    onClick={() => onIncrease(perfume.id)}>
+                                                    <FontAwesomeIcon size="lg" icon={faChevronUp} />
                                                 </button>
                                                 <input type="text"
-                                                       className="form-control input-number"
-                                                       style={{width: "45px"}}
-                                                       value={perfumeInCart.get(perfume.id)}
-                                                       onChange={(event) => handleInputChange(event, perfume.id)}/>
+                                                    className="form-control input-number"
+                                                    style={{ width: "45px" }}
+                                                    value={perfumeInCart.get(perfume.id)}
+                                                    onChange={(event) => handleInputChange(event, perfume.id)} />
                                                 <button className="btn btn-default"
-                                                        disabled={perfumeInCart.get(perfume.id) === 1}
-                                                        onClick={() => onDecrease(perfume.id)}>
-                                                    <FontAwesomeIcon size="lg" icon={faChevronDown}/>
+                                                    disabled={perfumeInCart.get(perfume.id) === 1}
+                                                    onClick={() => onDecrease(perfume.id)}>
+                                                    <FontAwesomeIcon size="lg" icon={faChevronDown} />
                                                 </button>
                                             </div>
                                             <div className="col-2">
                                                 <div className="card-body">
                                                     <h5 className="card-title">
-                                                        <span>$ {perfume.price * perfumeInCart.get(perfume.id)}</span>
+                                                        <span>
+                                                            <sup>đ</sup>
+                                                            {perfume.price * perfumeInCart.get(perfume.id)}
+                                                        </span>
                                                     </h5>
-                                                    <button className="btn btn-warning mb-2"
-                                                            onClick={() => deleteFromCart(perfume.id)}>
-                                                        <FontAwesomeIcon className="mr-2"
-                                                                         icon={faMinusSquare}/> Xóa
+                                                    <button
+                                                        className="btn btn-danger mb-2"
+                                                        onClick={() => deleteFromCart(perfume.id)}
+                                                    >
+                                                        Xóa
                                                     </button>
                                                 </div>
                                             </div>
@@ -130,19 +135,19 @@ const Cart: FC = () => {
                                     </div>
                                 )
                             })}
-                            <hr className="my-3"/>
                             <div className="row">
-                                <div className="col-9">
-                                    <p className="h5 text-right">Total: $ <span>{totalPrice}</span></p>
-                                </div>
-                                <div className="col-3">
-                                    <div className="form-row">
-                                        <Link to={"/order"}>
-                                            <button className="btn btn-success">
-                                                <FontAwesomeIcon className="mr-2" icon={faShoppingBag}/> Thanh toán
-                                            </button>
-                                        </Link>
-                                    </div>
+                                <p className="h5 text-right ml-auto mr-3 mt-3">
+                                    Tổng: <sup>đ</sup>
+                                    <span>{totalPrice}</span>
+                                </p>
+                            </div>
+                            <div className="row">
+                                <div className="form-row ml-auto mr-3 mt-5">
+                                    <Link to={"/order"}>
+                                        <button className="btn btn-primary">
+                                            Thanh toán
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

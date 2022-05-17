@@ -15,8 +15,8 @@ const OrderFinalize: FC = () => {
 
     return (
         <div className="container text-center mt-5">
-            <h2>Thank you for the order!</h2>
-            <p>Your order number is: <span>{order.id}</span></p>
+            <h2>Cảm ơn bạn đã đặt hàng!</h2>
+            <p>Mã số đơn hàng của bạn là: <span>{order.id}</span></p>
         </div>
     );
 };

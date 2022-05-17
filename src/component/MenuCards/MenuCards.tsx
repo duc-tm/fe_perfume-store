@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
-import {faArrowDown, faArrowUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import React, { FC } from 'react';
+import { faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import usePagination from "../Pagination/usePagination";
 import PerfumeCardItem from "../PerfumeCardItem/PerfumeCardItem";
 import PaginationItem from "../Pagination/PaginationItem";
 import SearchForm from "../SearchForm/SearchForm";
-import {Perfume} from "../../types/types";
+import { Perfume, Review } from "../../types/types";
 import Spinner from "../Spinner/Spinner";
 
 type PropsType = {
@@ -19,7 +19,7 @@ type PropsType = {
     handleSortByPrice: (sortedBy: boolean, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void
 };
 
-const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searchByData, sortByPrice, handleSortByPrice}) => {
+const MenuCards: FC<PropsType> = ({ data, loading, itemsPerPage, startFrom, searchByData, sortByPrice, handleSortByPrice }) => {
     const {
         slicedData,
         pagination,
@@ -28,7 +28,7 @@ const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searc
         changePage,
         setFilteredData,
         setSearching
-    } = usePagination({itemsPerPage, data, startFrom});
+    } = usePagination({ itemsPerPage, data, startFrom });
 
     return (
         <div className="container">
@@ -37,7 +37,7 @@ const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searc
                     data={data}
                     searchByData={searchByData}
                     setFilteredData={setFilteredData}
-                    setSearching={setSearching}/>
+                    setSearching={setSearching} />
             </div>
             <div className="container-fluid mt-3 ml-2">
                 <div className="row">
@@ -46,7 +46,7 @@ const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searc
                             pagination={pagination}
                             prevPage={prevPage}
                             changePage={changePage}
-                            nextPage={nextPage}/>
+                            nextPage={nextPage} />
                     </div>
                     <div className="col-md-6 d-flex justify-content-end">
                         <ul className="pagination">
@@ -56,42 +56,42 @@ const MenuCards: FC<PropsType> = ({data, loading, itemsPerPage, startFrom, searc
                                 <a className={sortByPrice ?
                                     "page-link bg-light border-dark text-dark" :
                                     "page-link bg-primary border-dark text-light"}
-                                   onClick={(event) => handleSortByPrice(false, event)}>
-                                    <FontAwesomeIcon className="fa-sm" icon={faArrowDown}/>
+                                    onClick={(event) => handleSortByPrice(false, event)}>
+                                    <FontAwesomeIcon className="fa-sm" icon={faArrowDown} />
                                 </a>
                             </li>
                             <li className={sortByPrice ? "page-item" : "page-item active"}>
                                 <a className={sortByPrice ?
                                     "page-link bg-primary border-dark text-light" :
                                     "page-link bg-light border-dark text-dark"}
-                                   onClick={(event) => handleSortByPrice(true, event)}>
-                                    <FontAwesomeIcon className="fa-sm" icon={faArrowUp}/>
+                                    onClick={(event) => handleSortByPrice(true, event)}>
+                                    <FontAwesomeIcon className="fa-sm" icon={faArrowUp} />
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                {loading ? <Spinner/> :
-                <>
-                    <div className="row">
-                        {slicedData.map((perfume: Perfume) => {
-                            return (
-                                <PerfumeCardItem
-                                    key={perfume.id}
-                                    perfume={perfume}
-                                    colSize={3}
-                                    link={"/product"}
-                                    btnName={"THÔNG TIN"}/>
-                            );
-                        })}
-                    </div>
-                    <PaginationItem
-                        pagination={pagination}
-                        prevPage={prevPage}
-                        changePage={changePage}
-                        nextPage={nextPage}/>
-                </>
-                }
+                {loading ? <Spinner /> : (
+                    <>
+                        <div className="row">
+                            {slicedData.map((perfume: Perfume) => {
+                                return (
+                                    <PerfumeCardItem
+                                        key={perfume.id}
+                                        perfume={perfume}
+                                        colSize={3}
+                                        link={"/product"}
+                                        btnName={"Xem"} />
+                                );
+                            })}
+                        </div>
+                        <PaginationItem
+                            pagination={pagination}
+                            prevPage={prevPage}
+                            changePage={changePage}
+                            nextPage={nextPage} />
+                    </>
+                )}
             </div>
         </div>
     );

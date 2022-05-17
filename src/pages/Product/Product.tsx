@@ -1,17 +1,17 @@
-import React, {FC, FormEvent, useEffect, useState} from 'react';
-import {Route, RouteComponentProps, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCartPlus, faPaperPlane, faStar} from "@fortawesome/free-solid-svg-icons";
+import React, { FC, FormEvent, useEffect, useState } from 'react';
+import { Route, RouteComponentProps, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus, faPaperPlane, faStar } from "@fortawesome/free-solid-svg-icons";
 import SockJS from "sockjs-client";
-import {CompatClient, Stomp} from '@stomp/stompjs';
+import { CompatClient, Stomp } from '@stomp/stompjs';
 import StarRatingComponent from 'react-star-rating-component';
 
-import {IMG_URL} from "../../utils/constants/url";
-import {fetchPerfumeByQuery, fetchPerfumeReviewsWS} from "../../redux/thunks/perfume-thunks";
-import {addReviewToPerfume, resetForm} from "../../redux/thunks/user-thunks";
-import {AppStateType} from "../../redux/reducers/root-reducer";
-import {Perfume, Review, ReviewData, ReviewError} from "../../types/types";
+import { IMG_URL } from "../../utils/constants/url";
+import { fetchPerfumeByQuery, fetchPerfumeReviewsWS } from "../../redux/thunks/perfume-thunks";
+import { addReviewToPerfume, resetForm } from "../../redux/thunks/user-thunks";
+import { AppStateType } from "../../redux/reducers/root-reducer";
+import { Perfume, Review, ReviewData, ReviewError } from "../../types/types";
 import halfStar from "../../img/star-half.svg";
 import Spinner from "../../component/Spinner/Spinner";
 import ProductReview from "./ProductReview";
@@ -19,7 +19,7 @@ import ScrollButton from "../../component/ScrollButton/ScrollButton";
 
 let stompClient: CompatClient | null = null;
 
-const Product: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
+const Product: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const perfume: Partial<Perfume> = useSelector((state: AppStateType) => state.perfume.perfume);
@@ -31,7 +31,7 @@ const Product: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
     const [author, setAuthor] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [rating, setRating] = useState<number>(0);
-    const {authorError, messageError, ratingError} = errors;
+    const { authorError, messageError, ratingError } = errors;
 
     useEffect(() => {
         // GraphQL example
@@ -71,7 +71,7 @@ const Product: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
 
     const addReview = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        const review: ReviewData = {perfumeId: match.params.id as string, author, message, rating}
+        const review: ReviewData = { perfumeId: match.params.id as string, author, message, rating }
         dispatch(addReviewToPerfume(review));
     };
 
@@ -79,141 +79,153 @@ const Product: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
         return (
             <StarRatingComponent
                 renderStarIconHalf={() => <img src={halfStar} alt="halfStar"
-                                               style={{width: "14.5px", marginBottom: "2px"}}/>}
-                renderStarIcon={() => <FontAwesomeIcon className="fa-sm" icon={faStar}/>}
+                    style={{ width: "14.5px", marginBottom: "2px" }} />}
+                renderStarIcon={() => <FontAwesomeIcon className="fa-sm" icon={faStar} />}
                 name={"star"}
                 starCount={5}
                 editing={false}
-                value={perfumeRating}/>
+                value={perfumeRating} />
         );
     };
 
     return (
         <div className="container mt-5 pb-5">
-            {loading ? <Spinner/> : <>
-                <ScrollButton/>
-                <div className="row">
-                    <div className="col-md-5">
-                        <div>
-                            <img src={IMG_URL + `${perfume.filename}`} className="rounded mx-auto w-100"/>
-                        </div>
-                    </div>
-                    <div className="col-md-7">
-                        <h2>{perfume.perfumeTitle}</h2>
-                        <h3>{perfume.perfumer}</h3>
-                        <p>Product code: <span>{perfume.id}</span></p>
-                        <div className="row">
-                            <div className="col-md-2">
-                                {renderStars(perfume.perfumeRating === 0 ? 5 : perfume.perfumeRating)}
-                            </div>
-                            <div className="col-md-10">
-                                <span style={{paddingBottom: "50px"}}>{perfume.reviews?.length} reviews</span>
+            {loading ? <Spinner /> : (
+                <>
+                    <ScrollButton />
+                    <div className="row">
+                        <div className="col-md-5">
+                            <div>
+                                <img src={`${IMG_URL}${perfume.filename}`} className="rounded mx-auto w-100" />
                             </div>
                         </div>
-                        <p style={{color: "#54C0A1"}}>Đang bán</p>
-                        <div className="row ml-1">
-                            <h6 className="mr-5"><span>${perfume.price}</span>.00</h6>
-                            <button type="submit"
-                                    className="btn btn-success mx-3"
-                                    onClick={addToCart}>
-                                <FontAwesomeIcon className="mr-2 fa-lg" icon={faCartPlus}/> THÊM VÀO GIỎ HÀNG
-                            </button>
-                        </div>
-                        <br/>
-                        <table className="table">
-                            <tbody>
-                            <tr>
-                                <td>Tiêu đề:</td>
-                                <td>{perfume.perfumeTitle}</td>
-                            </tr>
-                            <tr>
-                                <td>Thương hiệu:</td>
-                                <td>{perfume.perfumer}</td>
-                            </tr>
-                            <tr>
-                                <td>Loại nước hoa:</td>
-                                <td>{perfume.type}</td>
-                            </tr>
-                            <tr>
-                                <td>Sản xuất năm:</td>
-                                <td>{perfume.year}</td>
-                            </tr>
-                            <tr>
-                                <td>Dung tích:</td>
-                                <td><span>{perfume.volume}</span> ml.</td>
-                            </tr>
-                            <tr>
-                                <td>Quốc gia sản xuất:</td>
-                                <td>{perfume.country}</td>
-                            </tr>
-                            <tr>
-                                <td>Giới tính:</td>
-                                <td>{perfume.perfumeGender}</td>
-                            </tr>
-                            <tr>
-                                <td>Top notes:</td>
-                                <td>{perfume.fragranceTopNotes}</td>
-                            </tr>
-                            <tr>
-                                <td>Heart notes:</td>
-                                <td>{perfume.fragranceMiddleNotes}</td>
-                            </tr>
-                            <tr>
-                                <td>Base notes:</td>
-                                <td>{perfume.fragranceBaseNotes}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div className="mt-5">
-                    <h3 className="text-center mb-5">ĐÁNH GIÁ</h3>
-                    <Route exact component={() => <ProductReview data={reviews} itemsPerPage={5}/>}/>
-                    <form onSubmit={addReview}>
-                        <div className="form-group border mt-5">
-                            <div className="mx-3 my-3">
-                                <div className="row">
-                                    <div className="col-md-4">
-                                        <label><span className="text-danger"><b>*</b></span> Họ tên</label>
-                                        <input
-                                            type="text"
-                                            className={authorError ? "form-control is-invalid" : "form-control"}
-                                            name="author"
-                                            value={author}
-                                            onChange={(event) => setAuthor(event.target.value)}/>
-                                        <div className="invalid-feedback">{authorError}</div>
-                                        <label><span className="text-danger"><b>*</b></span> Nội dung đánh giá</label>
-                                    </div>
-                                    <div className="col-md-8">
-                                        <label><span className="text-danger"><b>*</b></span> Vote</label>
-                                        <div>
-                                            <StarRatingComponent
-                                                name="star"
-                                                starCount={5}
-                                                value={rating}
-                                                onStarClick={(value) => setRating(value)}
-                                                renderStarIcon={() => <FontAwesomeIcon className="fa-sm"
-                                                                                       icon={faStar}/>}/>
-                                            <div className="invalid-feedback d-block">{ratingError}</div>
-                                        </div>
-                                    </div>
+                        <div className="col-md-7">
+                            <h2>{perfume.perfumeTitle}</h2>
+                            <h3>{perfume.perfumer}</h3>
+                            <p>Mã sản phẩm: <span>{perfume.id}</span></p>
+                            <div className="row">
+                                <div className="col-md-2">
+                                    {renderStars(perfume.perfumeRating === 0 ? 5 : perfume.perfumeRating)}
                                 </div>
-                                <textarea
-                                    rows={4}
-                                    className={messageError ? "form-control is-invalid" : "form-control"}
-                                    name="message"
-                                    value={message}
-                                    style={{resize: "none"}}
-                                    onChange={(event) => setMessage(event.target.value)}/>
-                                <div className="invalid-feedback">{messageError}</div>
-                                <button type="submit" className="btn btn-dark mt-3">
-                                    <FontAwesomeIcon className="mr-2" icon={faPaperPlane}/>Đăng bài đánh giá
+                                <div className="col-md-10">
+                                    <span style={{ paddingBottom: "50px" }}>
+                                        {perfume.reviews?.length} đánh giá
+                                    </span>
+                                </div>
+                            </div>
+                            <p style={{ color: "#54C0A1" }}>Đang bán</p>
+                            <div className="row">
+                                <h5 className="mr-5"><span><sup>đ</sup>{perfume.price}</span></h5>
+                            </div>
+                            <div className="row mt-3">
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary mx-3"
+                                    onClick={addToCart}
+                                >
+                                    <FontAwesomeIcon className="mr-2 fa-lg" icon={faCartPlus} />
+                                    THÊM VÀO GIỎ HÀNG
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </>}
+                    </div>
+                    <div className="mt-5">
+                        <h3 className="my-3">Thông tin chi tiết</h3>
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <td>Sản phẩm:</td>
+                                    <td>{perfume.perfumeTitle}</td>
+                                </tr>
+                                <tr>
+                                    <td>Thương hiệu:</td>
+                                    <td>{perfume.perfumer}</td>
+                                </tr>
+                                <tr>
+                                    <td>Loại nước hoa:</td>
+                                    <td>{perfume.type}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sản xuất năm:</td>
+                                    <td>{perfume.year}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dung tích:</td>
+                                    <td><span>{perfume.volume}</span> ml.</td>
+                                </tr>
+                                <tr>
+                                    <td>Quốc gia sản xuất:</td>
+                                    <td>{perfume.country}</td>
+                                </tr>
+                                <tr>
+                                    <td>Giới tính:</td>
+                                    <td>{perfume.perfumeGender}</td>
+                                </tr>
+                                <tr>
+                                    <td>Top notes:</td>
+                                    <td>{perfume.fragranceTopNotes}</td>
+                                </tr>
+                                <tr>
+                                    <td>Heart notes:</td>
+                                    <td>{perfume.fragranceMiddleNotes}</td>
+                                </tr>
+                                <tr>
+                                    <td>Base notes:</td>
+                                    <td>{perfume.fragranceBaseNotes}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="mt-5">
+                        <h3 className="text-center mb-5">ĐÁNH GIÁ</h3>
+                        <Route exact component={() => <ProductReview data={reviews} itemsPerPage={5} />} />
+                        <form onSubmit={addReview}>
+                            <div className="form-group border mt-5">
+                                <div className="mx-3 my-3">
+                                    <div className="row">
+                                        <div className="col-md-4">
+                                            <label><span className="text-danger"><b>*</b></span> Họ tên</label>
+                                            <input
+                                                type="text"
+                                                className={authorError ? "form-control is-invalid" : "form-control"}
+                                                name="author"
+                                                value={author}
+                                                onChange={(event) => setAuthor(event.target.value)} />
+                                            <div className="invalid-feedback">{authorError}</div>
+                                            <label><span className="text-danger"><b>*</b></span> Nội dung đánh giá</label>
+                                        </div>
+                                        <div className="col-md-8">
+                                            <label><span className="text-danger"><b>*</b></span> Vote</label>
+                                            <div>
+                                                <StarRatingComponent
+                                                    name="star"
+                                                    starCount={5}
+                                                    value={rating}
+                                                    onStarClick={(value) => setRating(value)}
+                                                    renderStarIcon={() => <FontAwesomeIcon className="fa-sm"
+                                                        icon={faStar} />} />
+                                                <div className="invalid-feedback d-block">{ratingError}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <textarea
+                                        rows={4}
+                                        className={messageError ? "form-control is-invalid" : "form-control"}
+                                        name="message"
+                                        value={message}
+                                        style={{ resize: "none" }}
+                                        onChange={(event) => setMessage(event.target.value)} />
+                                    <div className="invalid-feedback">{messageError}</div>
+                                    <button type="submit" className="btn btn-primary mt-3">
+                                        <FontAwesomeIcon className="mr-2" icon={faPaperPlane} />
+                                        Đánh giá
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
