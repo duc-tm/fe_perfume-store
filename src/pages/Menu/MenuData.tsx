@@ -28,8 +28,8 @@ export const gender: Array<{ name: string }> = [
 
 export const price: Array<PerfumePrice> = [
     {"id": 1, "name": "Tất cả", "array": []},
-    {"id": 2, "name": "15 - 25 $", "array": [15, 25]},
-    {"id": 3, "name": "25 - 40 $", "array": [25, 40]},
-    {"id": 4, "name": "40 - 90 $", "array": [40, 90]},
-    {"id": 5, "name": "90 - 175+ $", "array": [90, 250]}
+    {"id": 2, "name": "100000 - 300000 VND", "array": [100000, 300000]},
+    {"id": 3, "name": "300000 - 500000 VND", "array": [300000, 500000]},
+    {"id": 4, "name": "500000 - 1000000 VND", "array": [500000, 1000000]},
+    {"id": 5, "name": "1000000 - 1500000+ VND", "array": [1000000, 5000000]}
 ];
