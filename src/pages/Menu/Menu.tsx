@@ -73,7 +73,7 @@ const Menu: FC = () => {
     };
 
     return (
-        <div className="container d-flex">
+        <div className="d-flex mx-auto" style={{width: '1400px'}}>
             <ScrollButton/>
             <nav id="sidebar">
                 <div className="sidebar-header">

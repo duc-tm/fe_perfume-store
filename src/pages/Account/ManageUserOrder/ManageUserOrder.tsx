@@ -58,7 +58,7 @@ const ManageUserOrder: FC = () => {
                         <span className="personal_data_text">{date}</span>
                     </p>
                     <h4 style={{marginBottom: "30px", marginTop: "30px"}}>Tổng tiền:
-                        <span style={{color: "green"}}> <sup>đ</sup>{totalPrice}</span>
+                        <span style={{color: "green"}}> <sup>đ</sup>{new Intl.NumberFormat().format(totalPrice)}</span>
                     </h4>
                 </div>
             </div>
@@ -82,7 +82,7 @@ const ManageUserOrder: FC = () => {
                             <th>{orderItem.perfume.perfumer}</th>
                             <th>{orderItem.perfume.perfumeTitle}</th>
                             <th>{orderItem.quantity}</th>
-                            <th><sup>đ</sup>{orderItem.perfume.price}</th>
+                            <th><sup>đ</sup>{new Intl.NumberFormat().format(orderItem.perfume.price)}</th>
                             <th><sup>đ</sup>{orderItem.amount}</th>
                         </tr>
                     );

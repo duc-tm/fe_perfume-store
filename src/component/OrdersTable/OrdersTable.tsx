@@ -33,7 +33,7 @@ const OrdersTable: FC<PropsType> = ({loading,orders}) => {
                                 <th>{order.date}</th>
                                 <th>{order.firstName + " " + order.lastName}</th>
                                 <th>{order.email}</th>
-                                <th>{order.totalPrice}</th>
+                                <th>{new Intl.NumberFormat().format(order.totalPrice)}</th>
                                 <th>
                                     <Link to={{pathname: `/account/user/orders/${order.id}`, state: order}}>
                                         Xem thêm

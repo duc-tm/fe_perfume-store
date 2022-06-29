@@ -79,18 +79,18 @@ const PerfumeListComponent:FC<PropsType> = ({data, itemsPerPage,startFrom,search
                         {slicedData.map((perfume: Perfume) => {
                             return (
                                 <div key={perfume.id} className="col-lg-3">
-                                    <div className="card mb-5" style={{height: "320px"}}>
-                                        <div style={{height: "92px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <div className="card mb-5" style={{height: "400px"}}>
+                                        <div style={{height: "150px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                                             <LazyLoadImage
                                                 effect="blur"
-                                                style={{width: "80px", marginTop: "20px"}}
+                                                style={{width: "150px", marginTop: "20px"}}
                                                 src={IMG_URL + `${perfume.filename}`}/>
                                         </div>
                                         <div className="card-body text-center">
                                             <StarRating perfumeRating={perfume.perfumeRating}/>
                                             <h6>{perfume.perfumeTitle}</h6>
                                             <h6>{perfume.perfumer}</h6>
-                                            <h6><span>${perfume.price}</span>.00</h6>
+                                            <h6><span>{new Intl.NumberFormat().format(perfume.price)} d</span></h6>
                                         </div>
                                         <div className="btn-group text-center mb-3">
                                             <Link type="button" className="btn btn-dark ml-2"

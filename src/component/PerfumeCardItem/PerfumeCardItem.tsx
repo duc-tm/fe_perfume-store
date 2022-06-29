@@ -18,18 +18,18 @@ type PropsType = {
 const PerfumeCardItem: FC<PropsType> = ({key, perfume, colSize, link, btnName}) => {
     return (
         <div key={key} className={`col-lg-${colSize}`}>
-            <div className="card mb-5" style={{height: "320px"}}>
-                <div style={{height: "92px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <div className="card mb-5" style={{height: "400px"}}>
+                <div style={{height: "150px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <LazyLoadImage
                         effect="blur"
-                        style={{width: "80px", marginTop: "20px"}}
+                        style={{width: "150px", marginTop: "20px"}}
                         src={`${IMG_URL}${perfume.filename}`}/>
                 </div>
                 <div className="card-body text-center">
                     <StarRating perfumeRating={perfume.perfumeRating}/>
                     <h6>{perfume.perfumeTitle}</h6>
                     <h6>{perfume.perfumer}</h6>
-                    <h6><span><sup>đ</sup>{perfume.price}</span></h6>
+                    <h6><span><sup>đ</sup>{new Intl.NumberFormat().format(perfume.price)}</span></h6>
                 </div>
                 <div className="text-center align-items-end mb-3">
                     <Link to={`${link}/${perfume.id}`}>

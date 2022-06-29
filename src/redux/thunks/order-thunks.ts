@@ -29,7 +29,7 @@ export const addOrder = (order: any, history: any) => async (dispatch: Dispatch)
             returnUrl: "http://localhost:3000/order/finalize",
             notifyUrl: "test",
             extraData: "test",
-            amount: 50000
+            amount: order.totalPrice
         };
         const urlPayment = await RequestService.post("/momos", payment);
         dispatch(confirmPayment(urlPayment.data));

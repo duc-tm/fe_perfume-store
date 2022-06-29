@@ -105,7 +105,7 @@ const EditPerfume: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
 
     return (
         <>
-            <ToastShow showToast={showToast} message={"Perfume successfully edited!"}/>
+            <ToastShow showToast={showToast} message={"Chỉnh sửa thành công!"}/>
             <div className="container">
                 <h4><FontAwesomeIcon className="mr-2" icon={faEdit}/>Sửa nước hoa</h4>
                 <form onSubmit={onFormSubmit}>

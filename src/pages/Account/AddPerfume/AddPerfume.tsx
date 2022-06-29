@@ -114,7 +114,7 @@ const AddPerfume: FC = () => {
 
     return (
         <>
-            <ToastShow showToast={showToast} message={"Perfume successfully added!"}/>
+            <ToastShow showToast={showToast} message={"Thêm mới thành công!"}/>
             <div className="container">
                 <h4>Thêm nước hoa</h4>
                 <br/>

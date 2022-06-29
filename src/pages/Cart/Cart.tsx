@@ -120,7 +120,7 @@ const Cart: FC = () => {
                                                     <h5 className="card-title">
                                                         <span>
                                                             <sup>đ</sup>
-                                                            {perfume.price * perfumeInCart.get(perfume.id)}
+                                                            {new Intl.NumberFormat().format(perfume.price * perfumeInCart.get(perfume.id))}
                                                         </span>
                                                     </h5>
                                                     <button
@@ -138,7 +138,7 @@ const Cart: FC = () => {
                             <div className="row">
                                 <p className="h5 text-right ml-auto mr-3 mt-3">
                                     Tổng: <sup>đ</sup>
-                                    <span>{totalPrice}</span>
+                                    <span>{new Intl.NumberFormat().format(totalPrice)}</span>
                                 </p>
                             </div>
                             <div className="row">

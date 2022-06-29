@@ -115,7 +115,9 @@ const Product: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                             </div>
                             <p style={{ color: "#54C0A1" }}>Đang bán</p>
                             <div className="row">
-                                <h5 className="mr-5"><span><sup>đ</sup>{perfume.price}</span></h5>
+                                <h5 className="mr-5"><span><sup>đ</sup>
+                                {new Intl.NumberFormat().format(perfume.price || 0)}
+                                </span></h5>
                             </div>
                             <div className="row mt-3">
                                 <button

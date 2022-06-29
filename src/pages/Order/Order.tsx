@@ -188,7 +188,7 @@ const Order: FC = () => {
                                                 <div className="card-body text-center">
                                                     <h5>{perfume.perfumeTitle}</h5>
                                                     <h6>{perfume.perfumer}</h6>
-                                                    <h6><span>Giá: <sup>đ</sup> {perfume.price}</span></h6>
+                                                    <h6><span>Giá: <sup>đ</sup> {new Intl.NumberFormat().format(perfume.price)}</span></h6>
                                                     <h6>
                                                         <span>Số lượng: {perfumesFromLocalStorage.get(perfume.id)}</span>
                                                     </h6>
@@ -203,7 +203,7 @@ const Order: FC = () => {
                             <FontAwesomeIcon icon={faCheckCircle}/> Kiểm tra đơn hàng
                         </button>
                         <div className="row">
-                            <h4>Thành tiền : <sup>đ</sup> <span>{totalPrice}</span></h4>
+                            <h4>Thành tiền : <sup>đ</sup> <span>{new Intl.NumberFormat().format(totalPrice)}</span></h4>
                         </div>
                     </div>
                 </div>
